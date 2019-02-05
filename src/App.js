@@ -24,13 +24,13 @@ class App extends Component {
       <div>
         <Navbar dark color="primary">
 		<div className="container">
-		<NavbarBrand href="/">Qué triste</NavbarBrand>
+		<NavbarBrand href="/">Disglosia xdd</NavbarBrand>
 		</div>
 		</Navbar>
 		<MenuBar options={this.state.options}/>
 		<Menu dishes={this.state.dishes}/>
 		<div>
-	  ¿Por qué me han hecho esto? ¿Por qué todos se han comportado así conmigo? ¿Por qué todos me abandonan cuando los necesito? Estado: 
+			...Ayer me dijiste que tú me querías, pero todo fue mentira
 	  </div>
       </div>
 	  

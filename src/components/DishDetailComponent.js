@@ -1,20 +1,57 @@
-import React, {Component} from 'react';
-import {Media} from 'reactstrap';
+import React, { Component } from 'react';
+import { Media } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
 
 class DishDetail extends Component {
 
-    constructor(props){
+    constructor(props) {
 
-super(props);
-this.state={a:1}
+        super(props);
 
     }
 
-render(){
+    render() {
 
-    return (<div>abc</div>);
+        const comments=this.props.dish.comments.map((comment)=> {
 
-}
+            return(
+
+                <div key={comment.id}>
+                <p>{comment.comment}</p>
+                <p>Said by: {comment.author} on {comment.date}</p>                
+                </div>
+
+            );
+
+
+        });
+
+        return (
+
+            
+
+            <div className="container">
+                Food's detail
+
+            <div className="row">
+                    <div className="col-12 col-md-5 m-1 mt-3">
+                        <Card>
+                            <CardImg width="100%" src={this.props.dish.image} alt={this.props.dish.name} />
+                            <CardBody>
+                                <CardTitle>{this.props.dish.name}</CardTitle>
+                                <CardText>{this.props.dish.description}</CardText>
+
+                            </CardBody>
+                        </Card>
+                    </div>
+                    <div className="col-12 col-md-5 m-1 mt-3">
+                        <h2>Comments</h2>
+                        {comments}
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
 }
 
