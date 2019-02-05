@@ -8,7 +8,6 @@ import {DISHES} from './shared/dishes';
 import {OPTIONS} from './shared/options';
 
 class App extends Component {
-	
 	constructor(props){
 		super(props);
 		
@@ -31,7 +30,7 @@ class App extends Component {
 		<MenuBar options={this.state.options}/>
 		<Menu dishes={this.state.dishes}/>
 		<div>
-	  ¿Por qué me han hecho esto? ¿Por qué todos se han comportado así conmigo? ¿Por qué todos me abandonan cuando los necesito?
+	  ¿Por qué me han hecho esto? ¿Por qué todos se han comportado así conmigo? ¿Por qué todos me abandonan cuando los necesito? Estado: 
 	  </div>
       </div>
 	  
