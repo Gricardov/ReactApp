@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Media} from 'reactstrap';
 
-class DishDetailComponent extends Component {
+class DishDetail extends Component {
 
     constructor(props){
 
 super(props);
-this.state={a:b}
+this.state={a:1}
 
     }
 
