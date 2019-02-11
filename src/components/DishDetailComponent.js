@@ -18,7 +18,7 @@ class DishDetail extends Component {
 
                 <div key={comment.id}>
                 <p>{comment.comment}</p>
-                <p>Said by: {comment.author} on {comment.date}</p>                
+                <p>Said by: {comment.author} on {new Intl.DateTimeFormat('en-US',{year:'numeric', month:'short', day:'2-digit'}).format(new Date(Date.parse(comment.date)))}</p>                
                 </div>
 
             );
