@@ -1,64 +1,63 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
 
-class Menu extends Component {
-
-	constructor(props) {
-
-		super(props);
-
-	
-		console.log('Menu component, constructor is invoked')
-	}
 
 
-	render() {
-		console.log('Menu component, render is invoked')
+function RenderMenuItem({ dish, onClick }) // It can also be just (props)
 
-		const menu = this.props.dishes.map((dish) => {
-			// For every dish, I'm going to return a layout for the dish
-			return (
+{
 
-				// key is used to identify each item uniquely
-				<div key={dish.id} className="col-12 col-md-5 m-1">
-					<Card onClick={
+	return (
 
-						()=> this.props.onClick(dish.id)
+		<Card onClick={
 
-					}>
-						<CardImg width="100%" src={dish.image} alt={dish.name} />
-						<CardImgOverlay>
-							<CardTitle>{dish.name}</CardTitle>
-						</CardImgOverlay>
-					</Card>
-				</div>
+			() => onClick(dish.id)
 
-			);
+		}>
+			<CardImg width="100%" src={dish.image} alt={dish.name} />
+			<CardImgOverlay>
+				<CardTitle>{dish.name}</CardTitle>
+			</CardImgOverlay>
+		</Card>
 
-		});
-
-
-		return (
-
-			<div className="container">
-				<div className="row">
-					{menu}
-				</div>
-				
-			</div>
-
-		);
-
-	}
-
-	componentDidMount() {
-
-		console.log('Menu component, componentDidMount is invoked')
-
-
-	}
-
+	);
 
 }
+
+const Menu = (props) => {
+
+	const menu = props.dishes.map((dish) => {
+		// For every dish, I'm going to return a layout for the dish
+		return (
+	
+			// key is used to identify each item uniquely
+			<div key={dish.id} className="col-12 col-md-5 m-1">
+				<RenderMenuItem dish={dish} onClick={props.onClick}/>
+			</div>
+	
+		);
+	
+	});
+	
+	
+	return (
+	
+		<div className="container">
+			<div className="row">
+				{menu}
+			</div>
+	
+		</div>
+	
+	);
+	
+}
+
+
+
+
+
+
+
 
 export default Menu;
