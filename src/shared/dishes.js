@@ -57,7 +57,7 @@ export const DISHES =
             {
             id: 0,
             rating: 5,
-            comment: "Imagina un mundo sin venecos",
+            comment: "Imagina un mundo lleno de venecas",
             author: "John Negro",
             date: "2012-10-16T17:57:28.556094Z"
             },

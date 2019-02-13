@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
 import Menu from './MenuComponent';
 import MenuBar from './MenuBar';
+import Header from './HeaderComponent';
+import Footer from './FooterComponent';
+import Home from './HomeComponent';
 import { DISHES } from '../shared/dishes';
 import { OPTIONS } from '../shared/options';
 import DishDetail from './DishDetailComponent';
+import {Switch, Route,Redirect} from 'react-router-dom';
 
 class Main extends Component {
     constructor(props) {
@@ -14,37 +17,37 @@ class Main extends Component {
 
             dishes: DISHES,
             options: OPTIONS,
-            selectedDish: 0
         };
 
     }
 
 
-    onDishSelect(dishId) {
-
-        this.setState({ selectedDish: dishId });
-
-    }
 
     render() {
+
+        const HomePage=()=>{
+
+        return (
+
+        <Home/>
+
+        );
+        }
+
         return (
             <div>
-                <Navbar dark color="primary">
-                    <div className="container">
-                        <NavbarBrand href="/">Disglosia xdd</NavbarBrand>
-                    </div>
-                </Navbar>
-                <MenuBar options={this.state.options} 
-                
-                 
-                
+                <Header />
+                <MenuBar options={this.state.options}
                 />
-                <Menu dishes={this.state.dishes} onClick={
+                <Switch>
+                <Route path="/home" component={HomePage}/>
+                <Route exact path="/menu" component={()=>
+                <Menu dishes={this.state.dishes}/>}/>    
+                <Redirect to="/home"/>
+            }
 
-                    (dishId) => this.onDishSelect(dishId)
-
-                } />
-                <DishDetail dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]} />
+                </Switch>
+                <Footer />
                 <div>
                     ...Ayer me dijiste que tú me querías, pero todo fue mentira
 	  </div>
