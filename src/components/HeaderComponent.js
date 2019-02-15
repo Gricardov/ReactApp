@@ -1,80 +1,80 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler,Collapse, NavItem, Jumbotron } from 'reactstrap';
-import {NavLink} from 'react-router-dom';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
 
-    constructor(props){
-super(props);
-this.state={isNavOpen:false};
-this.toggleNav=this.toggleNav.bind(this);
+    constructor(props) {
+        super(props);
+        this.state = { isNavOpen: false };
+        this.toggleNav = this.toggleNav.bind(this);
     }
 
-    toggleNav(){
+    toggleNav() {
 
-        this.setState({isNavOpen:!this.state.isNavOpen});        
+        this.setState({ isNavOpen: !this.state.isNavOpen });
 
     }
 
     render() {
         //<React.Fragment>, groups React elem   ents, doesn't add an extra
         // node into the DOM. A div would.
-        return(
-        <>
-            <Navbar dark expand="md">
-                <div className="container">
+        return (
+            <>
+                <Navbar dark expand="md">
+                    <div className="container">
 
-<NavbarToggler onClick={this.toggleNav}/>
+                        <NavbarToggler onClick={this.toggleNav} />
 
-                    <NavbarBrand className="mr-auto" href="/"><img src="assets/images/logo.png" height="30" width="41" alt="xd"/>
-                    </NavbarBrand>
+                        <NavbarBrand className="mr-auto" href="/"><img src="assets/images/logo.png" height="30" width="41" alt="xd" />
+                        </NavbarBrand>
 
-                    <Collapse isOpen={this.state.isNavOpen} navbar>
+                        <Collapse isOpen={this.state.isNavOpen} navbar>
 
-                    <Nav navbar>
+                            <Nav navbar>
 
-                    <NavItem>
-                    <NavLink className="nav-link" to="/home">
-                        <span className="fa fa-home fa-lg"></span> Home
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/home">
+                                        <span className="fa fa-home fa-lg"></span> Home
                     </NavLink>
-                    </NavItem>
+                                </NavItem>
 
-                    <NavItem>
-                    <NavLink className="nav-link" to="/aboutus">
-                        <span className="fa fa-info fa-lg"></span> About us
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/aboutus">
+                                        <span className="fa fa-info fa-lg"></span> About us
                     </NavLink>
-                    </NavItem>
+                                </NavItem>
 
-                    <NavItem>
-                    <NavLink className="nav-link" to="/menu">
-                        <span className="fa fa-list fa-lg"></span> Menu
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/menu">
+                                        <span className="fa fa-list fa-lg"></span> Menu
                     </NavLink>
-                    </NavItem>
+                                </NavItem>
 
-                    <NavItem>
-                    <NavLink className="nav-link" to="/contactus">
-                        <span className="fa fa-address-card fa-lg"></span> Contact us
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/contactus">
+                                        <span className="fa fa-address-card fa-lg"></span> Contact us
                     </NavLink>
-                    </NavItem>
+                                </NavItem>
 
-                    </Nav>
+                            </Nav>
 
-</Collapse>
+                        </Collapse>
 
-                </div>
-            </Navbar>
-            <Jumbotron>
-                <div className="container">
-                    <div className="row row-header">
-                        <div className="col-12 col-sm-6">
-                            <h1>The Krusty Krab</h1>
-                            <p>We take inspiration from Spongebob</p>
+                    </div>
+                </Navbar>
+                <Jumbotron>
+                    <div className="container">
+                        <div className="row row-header">
+                            <div className="col-12 col-sm-6">
+                                <h1>The Krusty Krab</h1>
+                                <p>We take inspiration from Spongebob</p>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Jumbotron>
-        </>);
+                </Jumbotron>
+            </>);
     }
 
 }
