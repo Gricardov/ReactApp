@@ -11,6 +11,8 @@ import { LEADERS } from '../shared/leaders';
 import { PROMOTIONS } from '../shared/promotions';
 import { OPTIONS } from '../shared/options';
 import DishDetail from './DishDetailComponent';
+import AboutusComponent from './AboutusComponent';
+
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 class Main extends Component {
@@ -89,12 +91,13 @@ class Main extends Component {
             <div>
                 <Header />
 
-                <MenuBar options={this.state.options} />
 
                 <Switch>
                     <Route path="/home" component={HomePage} />
                     <Route exact path="/menu" component={() =>
                         <Menu dishes={this.state.dishes} />} />
+                    <Route exact path="/aboutus" component={()=>
+                        <AboutusComponent leaders={this.state.leaders}/> }/>
                     <Route path="/menu/:dishId" component={DishId} />
                     <Route exact path="/contactus" component={Contact} />
                     <Redirect to="/home" />
