@@ -40,7 +40,7 @@ class Header extends Component {
     }
 
     render() {
-        //<React.Fragment>, groups React elem   ents, doesn't add an extra
+        //<React.Fragment>, groups React elements, doesn't add an extra
         // node into the DOM. A div would.
         return (
             <>

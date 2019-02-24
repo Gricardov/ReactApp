@@ -5,6 +5,7 @@ import { template } from 'handlebars';
 import { AST_PropAccess } from 'terser';
 import { Link } from 'react-router-dom';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import CommentForm from './CommentFormComponent';
 
 function RenderComments({ comments }) {
 
@@ -23,7 +24,11 @@ function RenderComments({ comments }) {
     });
 
     return (
-        component
+        <div>
+        {component}
+        <CommentForm />
+        </div>
+
     );
 
 
