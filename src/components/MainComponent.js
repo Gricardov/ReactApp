@@ -11,6 +11,9 @@ import AboutusComponent from './AboutusComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import {addComment} from '../redux/ActionCreators';
+
+// To receive props
 const mapStateToProps = (state) => {
     return {
 
@@ -22,6 +25,13 @@ const mapStateToProps = (state) => {
     }
 
 }
+
+// To execute remote methods
+const mapDispatchToProps=(dispatch) => ({
+
+    addComment: (dishId, rating, author, comment)=> dispatch(addComment(dishId, rating, author, comment))
+
+});
 
 class Main extends Component {
     constructor(props) {
@@ -75,6 +85,7 @@ class Main extends Component {
                         comment.dishId === parseInt(match.params.dishId, 10)
 
                     )}
+                    addComment={this.props.addComment}
 
                 />
 
@@ -111,4 +122,4 @@ class Main extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

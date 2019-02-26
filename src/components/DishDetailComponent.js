@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import CommentForm from './CommentFormComponent';
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, dishId }) {
 
 
     const component = comments.map((comment) => {
@@ -26,7 +26,7 @@ function RenderComments({ comments }) {
     return (
         <div>
         {component}
-        <CommentForm />
+        <CommentForm dishId={dishId} addComment={addComment}/>
         </div>
 
     );
@@ -79,7 +79,9 @@ const DishDetail = function Details(props) {
                 <div className="col-12 col-md-5 m-1 mt-3">
                     <h2>Comments</h2>
 
-                    <RenderComments comments={props.comments} />
+                    <RenderComments comments={props.comments} 
+                    addComment={props.addComment}
+                    dishId={props.dish.id} />
                 </div>
             </div>
         </div>
