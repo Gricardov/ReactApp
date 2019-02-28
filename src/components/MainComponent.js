@@ -11,7 +11,7 @@ import AboutusComponent from './AboutusComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {addComment} from '../redux/ActionCreators';
+import {addComment, fetchDishes} from '../redux/ActionCreators';
 
 // To receive props
 const mapStateToProps = (state) => {
@@ -29,8 +29,8 @@ const mapStateToProps = (state) => {
 // To execute remote methods
 const mapDispatchToProps=(dispatch) => ({
 
-    addComment: (dishId, rating, author, comment)=> dispatch(addComment(dishId, rating, author, comment))
-
+    addComment: (dishId, rating, author, comment)=> dispatch(addComment(dishId, rating, author, comment)),
+    fetchDishes: ()=> {dispatch(fetchDishes())}
 });
 
 class Main extends Component {
@@ -39,7 +39,11 @@ class Main extends Component {
 
     }
 
+    componentDidMount() {
 
+        this.props.fetchDishes();
+
+    }
 
     render() {
 
@@ -48,12 +52,14 @@ class Main extends Component {
             return (
 
                 <Home
-                    dish={this.props.dishes.filter((dish) => {
+                    dish={this.props.dishes.dishes.filter((dish) => {
 
                         return dish.featured
 
                     })[0]}
 
+                    dishesLoading={this.props.dishes.isLoading}
+                    dishesErrMess={this.props.dishes.errMess}
                     promotion={this.props.promotions.filter((promo) => {
 
                         return promo.featured
@@ -74,11 +80,14 @@ class Main extends Component {
         const DishId = ({ match }) => {
             return (
 
-                <DishDetail dish={this.props.dishes.filter((dish) =>
+                <DishDetail dish={this.props.dishes.dishes.filter((dish) =>
 
                     dish.id === parseInt(match.params.dishId, 10)
 
                 )[0]}
+
+                    isLoading={this.props.dishes.isLoading}
+                    dishErrMess={this.props.dishes.errMess}
 
                     comments={this.props.comments.filter((comment) =>
 

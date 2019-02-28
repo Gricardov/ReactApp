@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import {Loading} from './LoadingComponent';
 function RenderMenuItem({ dish }) // It can also be just (props)
 
 {
@@ -23,7 +23,7 @@ function RenderMenuItem({ dish }) // It can also be just (props)
 
 const Menu = (props) => {
 
-	const menu = props.dishes.map((dish) => {
+	const menu = props.dishes.dishes.map((dish) => {
 		// For every dish, I'm going to return a layout for the dish
 		return (
 
@@ -36,7 +36,34 @@ const Menu = (props) => {
 
 	});
 
+	if (props.dishes.isLoading){
 
+		return (
+		
+			<div className="container">
+				<div className="row">
+				<Loading />
+				</div>
+			</div>
+		
+		);
+		
+		}
+		
+		else if (props.dishes.errMess){
+		
+		   return (
+		
+				<div className="container">
+					<div className="row">
+						<h4>{props.dishes.errMess}</h4>
+					</div>
+				</div>
+			
+			); 
+		
+		}
+	else {
 	return (
 
 		<div className="container">
@@ -63,7 +90,7 @@ const Menu = (props) => {
 		</div>
 
 	);
-
+	}
 }
 
 
