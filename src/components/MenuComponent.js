@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {Loading} from './LoadingComponent';
+
 function RenderMenuItem({ dish }) // It can also be just (props)
 
 {
