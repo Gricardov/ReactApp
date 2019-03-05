@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import CommentForm from './CommentFormComponent';
 import {Loading } from './LoadingComponent';
+import {baseURL} from '../shared/baseURL';
 
 function RenderComments({ comments, addComment, dishId }) {
 
@@ -39,7 +40,7 @@ function RenderComments({ comments, addComment, dishId }) {
 function RenderDish({ dish }) {
     return (
         <Card>
-            <CardImg width="100%" src={dish.image} alt={dish.name} />
+            <CardImg width="100%" src={baseURL+dish.image} alt={dish.name} />
             <CardBody>
                 <CardTitle>{dish.name}</CardTitle>
                 <CardText>{dish.description}</CardText>
