@@ -9,7 +9,7 @@ import CommentForm from './CommentFormComponent';
 import {Loading } from './LoadingComponent';
 import {baseURL} from '../shared/baseURL';
 
-function RenderComments({ comments, addComment, dishId }) {
+function RenderComments({ comments, postComment, dishId }) {
 
 
     const component = comments.map((comment) => {
@@ -28,7 +28,7 @@ function RenderComments({ comments, addComment, dishId }) {
     return (
         <div>
         {component}
-        <CommentForm dishId={dishId} addComment={addComment}/>
+        <CommentForm dishId={dishId} postComment={postComment}/>
         </div>
 
     );
@@ -110,7 +110,7 @@ else if (props.errMess){
                     <h2>Comments</h2>
 
                     <RenderComments comments={props.comments} 
-                    addComment={props.addComment}
+                    postComment={props.postComment}
                     dishId={props.dish.id} />
                 </div>
             </div>

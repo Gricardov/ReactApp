@@ -29,8 +29,8 @@ class CommentForm extends Component {
 
     handleSubmit(values) {
         this.toggleModal();
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
-        alert(JSON.stringify(values));
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
+        
 
     }
 
@@ -46,7 +46,7 @@ class CommentForm extends Component {
                     <ModalHeader>Submit your comment</ModalHeader>
                     <ModalBody>
                         <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
-                            <div class="container">
+                            <div className="container">
                                 <Row className="form-group">
                                     <Label htmlFor="rating" md={12}>Rating</Label>
                                     <Col md={12}>
@@ -63,7 +63,7 @@ class CommentForm extends Component {
                                 <Row className="form-group">
                                     <Label htmlFor="author" md={12}>Your name</Label>
                                     <Col md={12}>
-                                        <Control.text id="author" name="author" model=".author" class="form-control"
+                                        <Control.text id="author" name="author" model=".author" className="form-control"
                                             validators={{
 
                                                 minLength: minLength(3), maxLength: maxLength(15)
@@ -90,7 +90,7 @@ class CommentForm extends Component {
                                 <Row className="form-group">
                                     <Label htmlFor="comment" md={12}>Comment</Label>
                                     <Col md={12}>
-                                        <Control.textarea id="comment" name="comment" model=".comment" class="form-control" rows={6} />
+                                        <Control.textarea id="comment" name="comment" model=".comment" className="form-control" rows={6} />
 
                                     </Col>
                                 </Row>

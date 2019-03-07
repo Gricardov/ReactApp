@@ -11,8 +11,9 @@ import AboutusComponent from './AboutusComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {addComment, fetchDishes, fetchComments, fetchPromos} from '../redux/ActionCreators';
+import {postComment, fetchDishes, fetchComments, fetchPromos} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
+import {TransitionGroup, CSSTransition} from 'react-transition-group';
 
 // To receive props
 const mapStateToProps = (state) => {
@@ -30,7 +31,7 @@ const mapStateToProps = (state) => {
 // To execute remote methods
 const mapDispatchToProps=(dispatch) => ({
 
-    addComment: (dishId, rating, author, comment)=> dispatch(addComment(dishId, rating, author, comment)),
+    postComment: (dishId, rating, author, comment)=> dispatch(postComment(dishId, rating, author, comment)),
     fetchDishes: ()=> {dispatch(fetchDishes())},
     fetchPromos: ()=> {dispatch(fetchPromos())},
     fetchComments: ()=>{dispatch(fetchComments())},
@@ -103,7 +104,7 @@ class Main extends Component {
 
                     )}
                     commentsErrMess={this.props.comments.errMess}
-                    addComment={this.props.addComment}
+                    postComment={this.props.postComment}
 
                 />
 
@@ -117,7 +118,9 @@ class Main extends Component {
         return (
             <div>
                 <Header />
-
+                <TransitionGroup>
+                    <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
+                    
                 <Switch>
                     <Route path="/home" component={HomePage} />
                     <Route exact path="/menu" component={() =>
@@ -137,6 +140,8 @@ class Main extends Component {
                     }
 
                 </Switch>
+                </CSSTransition>
+                </TransitionGroup>
                 <Footer />
                 <div>
                     ...Ayer me dijiste que tú me querías, pero todo fue mentira
