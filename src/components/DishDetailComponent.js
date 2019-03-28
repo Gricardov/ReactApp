@@ -1,13 +1,11 @@
 import React from 'react';
-import { Media } from 'reactstrap';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
-import { template } from 'handlebars';
-import { AST_PropAccess } from 'terser';
+import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import CommentForm from './CommentFormComponent';
 import {Loading } from './LoadingComponent';
 import {baseURL} from '../shared/baseURL';
+import {FadeTransform,Fade,Stagger} from 'react-animation-components';
 
 function RenderComments({ comments, postComment, dishId }) {
 
@@ -15,22 +13,24 @@ function RenderComments({ comments, postComment, dishId }) {
     const component = comments.map((comment) => {
 
         return (
-
+            <Fade in>
             <div key={comment.id}>
                 <p>{comment.comment}</p>
                 <p>Said by: {comment.author} on {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(comment.date)))}</p>
             </div>
-
+            </Fade>
         )
 
     });
 
     return (
-        <div>
+        <>
+        <Stagger in>
         {component}
+        
         <CommentForm dishId={dishId} postComment={postComment}/>
-        </div>
-
+        </Stagger>
+        </>
     );
 
 
@@ -39,6 +39,11 @@ function RenderComments({ comments, postComment, dishId }) {
 
 function RenderDish({ dish }) {
     return (
+        <FadeTransform in
+            transformProps={{
+                exitTransform: 'scale(0.1) translateY(-50%)'
+
+            }}>
         <Card>
             <CardImg width="100%" src={baseURL+dish.image} alt={dish.name} />
             <CardBody>
@@ -47,6 +52,7 @@ function RenderDish({ dish }) {
 
             </CardBody>
         </Card>
+        </FadeTransform>
     );
 }
 

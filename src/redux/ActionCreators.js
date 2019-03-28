@@ -74,6 +74,8 @@ export const fetchComments = () => (dispatch) => {
 
 export const fetchPromos = () => (dispatch) => {
 
+    dispatch(promosLoading());
+
     return fetch(baseURL + 'promotions')
         .then(response => {
 
@@ -101,6 +103,40 @@ export const fetchPromos = () => (dispatch) => {
         .then(response => response.json())
         .then(promotions => dispatch(addPromos(promotions)))
         .catch(error => dispatch(promosFailed(error.message)))
+
+
+}
+
+export const fetchLeaders=()=>(dispatch)=>{
+
+    dispatch(leadersLoading())
+
+    return fetch(baseURL+'leaders')
+            .then(response=>{
+
+                if(response.ok){
+
+                    return response;
+
+                } else {
+
+                    var error = new Error('Error ' + response.status +
+                    ': ' + response.statusText)
+                    error.response=response;
+                    throw error;
+
+                }
+
+
+            }, error=>{
+
+                var errMess=new Error(error.message);
+                throw errMess;
+
+            })
+            .then (response=>response.json())
+            .then(leaders=>dispatch(addLeaders(leaders)))
+            .catch(error=>dispatch(leadersFailed(error.message)))
 
 
 }
@@ -135,7 +171,7 @@ export const postComment = (dishId, rating, author, comment) =>(dispatch)=> {
             else {
 
                 var error = new Error('Error ' + response.status +
-                    ': ' + response.statusText)
+                    ': ' + response.statusText);
                 error.response = response;
                 throw error;
 
@@ -155,6 +191,71 @@ export const postComment = (dishId, rating, author, comment) =>(dispatch)=> {
 
 }
 
+export const postFeedback=(firstName, lastName, telNum, eMail, agree, contactType,message)=>(dispatch)=>{
+    
+    dispatch(addFeedbackLoading());
+
+    const newFeedback={
+
+        firstname:firstName,
+        lastname:lastName,
+        telnum:telNum,
+        email:eMail,
+        agree:agree,
+        contactType:contactType,
+        message:message
+
+    }
+    newFeedback.date=new Date().toISOString();
+    console.log("Esto llega "+JSON.stringify(newFeedback));
+
+    return fetch(baseURL+'feedback',{
+        method:'POST',
+        body:JSON.stringify(newFeedback),
+        headers: {
+            'content-type':'application/json'
+        },
+        credentials: 'same-origin'
+
+    })
+
+    .then (response=>{
+
+        if(response.ok){
+
+            return response;
+
+        } else {
+
+            var error = new Error('Error ' + response.status +
+            ': ' + response.statusText);
+            error.response=response;
+            throw error;
+        }
+
+    }, error=>{
+
+        var errMess= new Error(error.message);
+        throw errMess;
+
+    })
+
+    .then(response=>response.json())
+    .then(feedback=>{
+
+        dispatch(addFeedback(feedback));
+        alert('Thanks for your feedback:\n'+JSON.stringify(feedback));
+
+    })
+    .catch(error=>{
+        addFeedbackFailed(error.message);
+        console.log('Post comments', error.message);
+        alert('Your comment could not be posted\nError: '+error.message);
+
+    })
+
+}
+
 // Events the dispatcher calls
 
 export const addComment = (comment) => ({
@@ -163,6 +264,26 @@ export const addComment = (comment) => ({
     payload: comment 
 
 });
+
+export const addFeedback = (feedback)=>({
+
+    type: ActionTypes.ADD_FEEDBACK,
+    payload: feedback
+
+})
+
+export const addFeedbackLoading=()=>({
+
+    type: ActionTypes.ADD_FEEDBACK_LOADING
+
+})
+
+export const addFeedbackFailed=(errmess)=>({
+
+    type: ActionTypes.ADD_FEEDBACK_FAILED,
+    payload: errmess
+
+})
 
 export const addDishes = (dishes) => ({
 
@@ -208,10 +329,30 @@ export const promosLoading = () => ({
 
     type: ActionTypes.PROMOS_LOADING
 
-});
+})
 
 export const promosFailed = (errmess) => ({
 
     type: ActionTypes.PROMOS_FAILED,
     payload: errmess
+})
+
+export const leadersLoading=()=>({
+
+    type: ActionTypes.LEADERS_LOADING
+    
+})
+
+export const addLeaders=(leaders)=>({
+
+    type: ActionTypes.ADD_LEADERS,
+    payload: leaders
+
+})
+
+export const leadersFailed=(errmess)=>({
+
+    type: ActionTypes.LEADERS_FAILED,
+    payload: errmess
+
 })
